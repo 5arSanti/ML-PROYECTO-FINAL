@@ -1,8 +1,9 @@
 # Proyecto final de Machine Learning — Plan de neveras FEMSA
 
-**Integrantes:** «Nombre Apellido», «Nombre Apellido», «Nombre Apellido»
-**Curso:** «Machine Learning» · **Docente:** «Nombre del docente» · **Entrega:** «fecha»
-**Tablero:** «link al tablero (Looker Studio / Google Sheets)»
+**Integrantes:** Rebeca Pedrozo Cueto · Daniela Fierro · Johel Santiago Arias Becerra
+**Curso:** Machine Learning - Ingenieria de Sistemas, Octavo semestre
+**Docente:** Gustavo Santos 
+**Tablero:** «link al tablero»
 
 ¿En cuáles **1.000 tiendas** debe FEMSA instalar sus 1.000 neveras nuevas, y cuánto ganaría cada mes?
 
