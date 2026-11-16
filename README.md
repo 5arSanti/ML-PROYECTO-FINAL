@@ -158,10 +158,8 @@ de los costos es, en la práctica, el óptimo.
 
 ## Declaración de uso de IA
 
-Este proyecto se desarrolló con apoyo de un asistente de IA (Claude) en: exploración inicial de la base,
-redacción del código del cuaderno, elección y discusión de los estimadores causales, y redacción de los
-textos explicativos.
+El grupo usó Claude como asistente en el análisis, con las skills **/explore-data, /analyze y /validate-data.**
 
-Las decisiones de modelación —definición del tratamiento, variables excluidas por fuga, estimador final y
-criterio de selección de las 1.000 tiendas— fueron revisadas, verificadas y asumidas por el grupo. Todos
-los integrantes pueden explicar y modificar cualquier celda del cuaderno.
+Con **/explore-data** exploró la estructura, las distribuciones y la calidad del conjunto de datos. Con **/analyze** formuló preguntas analíticas, interpretó resultados, identificó patrones y discutió alternativas metodológicas. Con **/validate-data** verificó cálculos y agregaciones, contrastó supuestos, buscó sesgos y revisó la coherencia entre resultados y conclusiones. También usó Claude para escribir y revisar el código del cuaderno y los textos explicativos.
+
+La dirección del proyecto y las decisiones metodológicas son del grupo: la definición del tratamiento, la exclusión de variables por posible fuga de información (data leakage), la selección del estimador causal final y el criterio para elegir las 1.000 tiendas. Cada validación sugerida por la herramienta se revisó antes de aceptarla. Todos los integrantes pueden explicar, justificar y modificar el código, las decisiones metodológicas y los resultados de este cuaderno.
