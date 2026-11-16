@@ -40,13 +40,13 @@ elegible es de **COP 8.300** y solo **4.493** se pagan la nevera.
 ## Cómo correrlo
 
 El cuaderno del repositorio está guardado **con sus resultados y gráficos**, así que se puede leer sin
-ejecutarlo. Las cifras citadas en este README corresponden a la corrida del «fecha de la corrida» con
+ejecutarlo. Las cifras citadas en este README corresponden a la corrida del 6/11/2026 con
 `SEED = 42`.
 
 ### Opción A — Google Colab (recomendada)
 
-1. Abrir [Cuaderno Colab](https://github.com/rebeca07-pedrozo/ML-PROYECTO-FINAL/blob/main/notebooks/proyecto_final_neveras.ipynb)
-2. El entorno permite cargar a mano el dataset.
+1. Abrir [Cuaderno Colab](https://github.com/rebeca07-pedrozo/ML-PROYECTO-FINAL/blob/main/proyecto_final_neveras.ipynb)
+2. Subir `base_refrescos_nevera.csv` al entorno (ícono de carpeta → *Subir*). Si prefieren Drive, ajustar `RUTA_DRIVE` en el módulo 0.
 3. **Entorno de ejecución → Ejecutar todo**.
 4. Al final, la celda 7.6 descarga `salidas/lista_grupoDaniJohelRebe.csv`.
 
