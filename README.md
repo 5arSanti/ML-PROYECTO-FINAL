@@ -2,7 +2,7 @@
 
 **Integrantes:** Rebeca Pedrozo Cueto · Daniela Fierro · Johel Santiago Arias Becerra
 
-**Curso:** Machine Learning 2026- II
+**Curso:** Machine Learning 2026 - II
 
 **Docente:** Gustavo Santos 
 
