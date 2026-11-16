@@ -1,5 +1,9 @@
 # Proyecto final de Machine Learning — Plan de neveras FEMSA
 
+**Integrantes:** «Nombre Apellido», «Nombre Apellido», «Nombre Apellido»
+**Curso:** «Machine Learning» · **Docente:** «Nombre del docente» · **Entrega:** «fecha»
+**Tablero:** «link al tablero (Looker Studio / Google Sheets)»
+
 ¿En cuáles **1.000 tiendas** debe FEMSA instalar sus 1.000 neveras nuevas, y cuánto ganaría cada mes?
 
 Este repositorio contiene el programa completo: un cuaderno que corre de principio a fin desde la base
@@ -20,8 +24,8 @@ original y produce la lista de tiendas, la estimación de ganancia y todos los i
 
 El núcleo del proyecto está en una sola comparación: la diferencia simple de promedios entre tiendas con y
 sin nevera es de **COP 748.000** al mes, pero el efecto causal es de **COP 273.000**. La diferencia simple
-sobreestima el efecto en **174 %**, y el 63 % de ella no es efecto de la nevera: es que FEMSA puso sus
-neveras en las mejores tiendas.
+sobreestima el efecto en **174 %** (en pesos; en términos porcentuales, +67,5 % frente a +27,1 %), y el 63 %
+de ella no es efecto de la nevera: es que FEMSA puso sus neveras en las mejores tiendas.
 
 Esto cambia la decisión por completo. Con la diferencia simple, cada tienda elegible parecería rendir
 COP 127.000 al mes y las 12.700 serían rentables. Con el efecto causal, la ganancia promedio de una
@@ -31,16 +35,23 @@ elegible es de **COP 8.300** y solo **4.493** se pagan la nevera.
 
 ## Cómo correrlo
 
+El cuaderno del repositorio está guardado **con sus resultados y gráficos**, así que se puede leer sin
+ejecutarlo. Las cifras citadas en este README corresponden a la corrida del «fecha de la corrida» con
+`SEED = 42`.
+
 ### Opción A — Google Colab (recomendada)
 
 1. Abrir [Google Colab](https://colab.research.google.com) → **Archivo → Subir cuaderno** →
    `notebooks/proyecto_final_neveras.ipynb`.
-2. En el **módulo 0**, cambiar `GRUPO = 'X'` por el número del grupo.
+2. Subir `datos/base_refrescos_nevera.csv` al entorno (ícono de carpeta → *Subir*). Si prefieren Drive,
+   descomentar el bloque `drive.mount` del **módulo 0** y ajustar `RUTA_DRIVE`.
 3. **Entorno de ejecución → Ejecutar todo**.
-4. Cuando lo pida, subir `base_refrescos_nevera.csv` (o descomentar el bloque de Google Drive
-   en la celda de carga).
+4. Al final, la celda §7.6 descarga `salidas/lista_grupoDaniJohelRebe.csv`.
 
 Tiempo total: **8–12 minutos** en una instancia estándar de Colab (sin GPU).
+
+> El cuaderno asume **ejecución en orden** (*Ejecutar todo*). Re-ejecutar celdas sueltas del módulo 2
+> después del módulo 5 redefiniría los conjuntos de variables.
 
 ### Opción B — Local
 
@@ -50,6 +61,7 @@ jupyter notebook notebooks/proyecto_final_neveras.ipynb
 ```
 
 El cuaderno busca la base en `datos/base_refrescos_nevera.csv`, en el directorio actual o en Drive.
+Requiere **scikit-learn ≥ 1.4** (se usa `root_mean_squared_error`).
 
 ---
 
@@ -60,25 +72,23 @@ El cuaderno busca la base en `datos/base_refrescos_nevera.csv`, en el directorio
 │   └── proyecto_final_neveras.ipynb   Programa completo (módulos 0 a 7)
 ├── datos/
 │   ├── base_refrescos_nevera.csv      Base original: 38.000 tiendas x 109 columnas
-│   └── diccionario_base_tiendas.xlsx  Diccionario de variables
-├── salidas/                           Se genera al correr el cuaderno
-│   ├── lista_grupoX.csv               ENTREGABLE: 1.000 tiendas
-│   ├── tablero_tiendas.csv            Insumo principal del tablero
+│   └── diccionario_base_tiendas.xlsx  Diccionario de variables (referencia; el cuaderno no lo lee)
+├── salidas/                           Resultados de la corrida final (21 archivos, ya incluidos)
+│   ├── lista_grupoDaniJohelRebe.csv   ENTREGABLE: 1.000 tiendas
+│   ├── tablero_tiendas.csv            Insumo principal del tablero (12.700 filas)
 │   ├── tablero_kpis.csv               Indicadores de resumen
-│   └── ...                            Métricas, importancias, validaciones
-├── nb_parts/                          Fuente del cuaderno, por módulo
-├── build_notebook.py                  Regenera el .ipynb desde nb_parts/
+│   └── ...                            Métricas, importancias, validaciones, sensibilidades
 ├── requirements.txt
 └── README.md
 ```
 
-> `nb_parts/` y `build_notebook.py` son solo la herramienta con la que se arma el cuaderno, para poder
-> editar cada módulo por separado sin tocar el JSON del `.ipynb`. Correr `python build_notebook.py`
-> reconstruye `notebooks/proyecto_final_neveras.ipynb`. **No es necesario** para usar el proyecto.
+Volver a correr el cuaderno sobrescribe `salidas/` con los mismos valores: la corrida es determinista.
 
 ---
 
-## Los seis módulos
+## Los módulos
+
+El módulo 0 configura y valida la base; el 7 exporta los resultados. Los seis módulos de análisis son:
 
 | Módulo | Qué hace | Hallazgo principal |
 |---|---|---|
@@ -113,7 +123,9 @@ mismo efecto del 27 % vale COP 90.000 en una tienda pequeña y COP 900.000 en un
 **2. El tratamiento se define con precisión.** El grupo "con nevera" de la base mezcla configuraciones:
 1 o 2 neveras, 1/2/4 puertas, de 0 a 15 años, y unas 3.800 tiendas con la nevera **averiada**. Como FEMSA
 instalará *una nevera nueva y operativa*, el análisis compara contra tiendas con exactamente esa
-configuración. La sensibilidad muestra que usar todas las tratadas infla el efecto.
+configuración. La sensibilidad muestra que la conclusión **no depende** de esa decisión: el efecto va de
+**+25,4 %** (solo neveras de ≤ 2 años) a **+27,1 %** (especificación principal), y usar todas las tratadas
+sin importar la dosis da **+26,0 %**.
 
 **3. Control de fuga en tres niveles.** No solo se excluyen las columnas que suman a la respuesta
 (verificado con `np.allclose`), sino también los resultados **simultáneos** (ventas de Postobón del mismo
