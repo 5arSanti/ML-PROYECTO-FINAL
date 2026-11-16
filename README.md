@@ -45,35 +45,20 @@ ejecutarlo. Las cifras citadas en este README corresponden a la corrida del «fe
 
 ### Opción A — Google Colab (recomendada)
 
-1. Abrir [Google Colab](https://colab.research.google.com) → **Archivo → Subir cuaderno** →
-   `notebooks/proyecto_final_neveras.ipynb`.
-2. Subir `datos/base_refrescos_nevera.csv` al entorno (ícono de carpeta → *Subir*). Si prefieren Drive,
-   descomentar el bloque `drive.mount` del **módulo 0** y ajustar `RUTA_DRIVE`.
+1. Abrir [Google Colab](https://drive.google.com/file/d/1VHIhElNjDaWJqnAgYpLKmIzROGzjjKyK/view?usp=sharing) → **Archivo → Subir cuaderno** →  `proyecto_final_neveras.ipynb`.
+2. El entorno permite cargar a mano el dataset.
 3. **Entorno de ejecución → Ejecutar todo**.
-4. Al final, la celda §7.6 descarga `salidas/lista_grupoDaniJohelRebe.csv`.
+4. Al final, la celda 7.6 descarga `salidas/lista_grupoDaniJohelRebe.csv`.
 
 Tiempo total: **8–12 minutos** en una instancia estándar de Colab (sin GPU).
 
 > El cuaderno asume **ejecución en orden** (*Ejecutar todo*). Re-ejecutar celdas sueltas del módulo 2
 > después del módulo 5 redefiniría los conjuntos de variables.
 
-### Opción B — Local
-
-```bash
-pip install -r requirements.txt
-jupyter notebook notebooks/proyecto_final_neveras.ipynb
-```
-
-El cuaderno busca la base en `datos/base_refrescos_nevera.csv`, en el directorio actual o en Drive.
-Requiere **scikit-learn ≥ 1.4** (se usa `root_mean_squared_error`).
-
----
-
 ## Estructura
 
 ```
-├── notebooks/
-│   └── proyecto_final_neveras.ipynb   Programa completo (módulos 0 a 7)
+├── proyecto_final_neveras.ipynb   Programa completo (módulos 0 a 7)
 ├── datos/
 │   ├── base_refrescos_nevera.csv      Base original: 38.000 tiendas x 109 columnas
 │   └── diccionario_base_tiendas.xlsx  Diccionario de variables (referencia; el cuaderno no lo lee)
@@ -82,7 +67,6 @@ Requiere **scikit-learn ≥ 1.4** (se usa `root_mean_squared_error`).
 │   ├── tablero_tiendas.csv            Insumo principal del tablero (12.700 filas)
 │   ├── tablero_kpis.csv               Indicadores de resumen
 │   └── ...                            Métricas, importancias, validaciones, sensibilidades
-├── requirements.txt
 └── README.md
 ```
 
