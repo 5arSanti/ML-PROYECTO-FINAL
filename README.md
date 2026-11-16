@@ -2,11 +2,11 @@
 
 **Integrantes:** Rebeca Pedrozo Cueto · Daniela Fierro · Johel Santiago Arias Becerra
 
-**Curso:** Machine Learning - Ingenieria de Sistemas, Octavo semestre
+**Curso:** Machine Learning 2026- II
 
 **Docente:** Gustavo Santos 
 
-**Tablero:** «link al tablero»
+**Tablero:** [Acceso al tablero](https://datastudio.google.com/reporting/676f51ff-bfb7-4f25-b3cf-650725a83625)
 
 ¿En cuáles **1.000 tiendas** debe FEMSA instalar sus 1.000 neveras nuevas, y cuánto ganaría cada mes?
 
@@ -45,7 +45,7 @@ ejecutarlo. Las cifras citadas en este README corresponden a la corrida del «fe
 
 ### Opción A — Google Colab (recomendada)
 
-1. Abrir [Google Colab](https://drive.google.com/file/d/1VHIhElNjDaWJqnAgYpLKmIzROGzjjKyK/view?usp=sharing) → **Archivo → Subir cuaderno** →  `proyecto_final_neveras.ipynb`.
+1. Abrir [Cuaderno Colab](https://github.com/rebeca07-pedrozo/ML-PROYECTO-FINAL/blob/main/notebooks/proyecto_final_neveras.ipynb)
 2. El entorno permite cargar a mano el dataset.
 3. **Entorno de ejecución → Ejecutar todo**.
 4. Al final, la celda 7.6 descarga `salidas/lista_grupoDaniJohelRebe.csv`.
