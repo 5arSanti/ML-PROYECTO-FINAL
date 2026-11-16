@@ -6,12 +6,13 @@
 
 **Docente:** Gustavo Santos
 
-**Tablero:** [Acceso al tablero](https://datastudio.google.com/reporting/676f51ff-bfb7-4f25-b3cf-650725a83625)
+**Tablero:** [Plan de Neveras en Streamlit](https://plan-neveras-femsa.streamlit.app)
 
 ¿En cuáles 1.000 tiendas debe FEMSA instalar sus 1.000 neveras nuevas, y cuánto ganaría cada mes?
 
 Este repositorio tiene el programa completo: un cuaderno que corre de principio a fin desde la base original
-y produce la lista de tiendas, la estimación de ganancia y todos los insumos del tablero.
+y produce la lista de tiendas, la estimación de ganancia y todos los insumos del tablero, más la aplicación
+Streamlit que presenta el recorrido y la operación.
 
 ---
 
@@ -62,17 +63,32 @@ Tarda entre 8 y 12 minutos en una instancia estándar de Colab, sin GPU.
 ### Opción B, local
 
 ```bash
-pip install "pandas>=2.0" "numpy>=1.24" "scikit-learn>=1.4" "matplotlib>=3.7"
+pip install -r requirements.txt
 jupyter notebook proyecto_final_neveras.ipynb
 ```
 
 El cuaderno busca la base en `datos/base_refrescos_nevera.csv` o en el directorio actual. Necesita
 scikit-learn 1.4 o superior, porque usa `root_mean_squared_error`.
 
+### Tablero
+
+El tablero lee solo la carpeta `salidas/`: si se vuelve a correr el cuaderno, toma las cifras nuevas.
+Tiene dos bloques: *Recorrido*, seis pantallas que presentan el proyecto módulo por módulo, y
+*Operación*, con filtros por región, ciudad y tipo de negocio, mapa de las 1.000 tiendas, comparación
+con reglas simples, riesgo de cambio, importancia de variables, escenarios y consulta por `id_tienda`.
+
+```bash
+pip install -r requirements.txt
+streamlit run dashboard/app.py
+```
+
 ## Estructura
 
 ```
 ├── proyecto_final_neveras.ipynb       Programa completo (módulos 0 a 7)
+├── requirements.txt                   Dependencias del cuaderno y del tablero
+├── dashboard/                         Tablero Streamlit (app.py y páginas)
+├── tests/                             Pruebas del tablero (pytest)
 ├── datos/
 │   ├── base_refrescos_nevera.csv      Base original: 38.000 tiendas x 109 columnas
 │   └── diccionario_base_tiendas.xlsx  Diccionario de variables (referencia, el cuaderno no lo lee)
