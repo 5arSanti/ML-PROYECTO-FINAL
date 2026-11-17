@@ -49,7 +49,7 @@ El cuaderno está guardado con sus resultados y sus gráficos, así que se puede
 ### Opción A, Google Colab (recomendada)
 
 1. Abrir el cuaderno en
-   [Colab](https://colab.research.google.com/github/rebeca07-pedrozo/ML-PROYECTO-FINAL/blob/main/proyecto_final_neveras.ipynb).
+   [Colab](https://colab.research.google.com/github/5arSanti/ML-PROYECTO-FINAL/blob/main/proyecto_final_neveras.ipynb).
 2. Subir `base_refrescos_nevera.csv` al entorno con el ícono de carpeta, opción *Subir*. Si prefieren Drive,
    ajustar `RUTA_DRIVE` en el módulo 0.
 3. **Entorno de ejecución → Ejecutar todo**.

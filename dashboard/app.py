@@ -1,4 +1,6 @@
 """Plan de Neveras FEMSA: presentación del proyecto y tablero de decisión."""
+from pathlib import Path
+
 import streamlit as st
 
 import carga
@@ -6,10 +8,13 @@ import datos
 import filtros
 import marca
 
-st.set_page_config(page_title="Plan de Neveras · FEMSA", page_icon=":material/kitchen:",
+_ASSETS = Path(__file__).with_name("assets")
+st.set_page_config(page_title="Plan de neveras · Coca-Cola FEMSA",
+                   page_icon=str(_ASSETS / "marca.png"),
                    layout="wide")
 filtros.conservar_estado()
 marca.aplicar_estilo()
+st.logo(str(_ASSETS / "lockup.png"), icon_image=str(_ASSETS / "marca.png"), size="large")
 
 RECORRIDO = [
     st.Page("paginas/r1_analisis.py", title="1. Análisis exploratorio", default=True),
@@ -20,15 +25,14 @@ RECORRIDO = [
     st.Page("paginas/r6_decision.py", title="6. Decisión"),
 ]
 OPERACION = [
-    st.Page("paginas/o1_tablero.py", title="Tablero", icon=":material/dashboard:"),
-    st.Page("paginas/o2_reglas.py", title="Comparar reglas", icon=":material/compare_arrows:"),
-    st.Page("paginas/o3_senales.py", title="Señales", icon=":material/insights:"),
-    st.Page("paginas/o4_escenarios.py", title="Escenarios", icon=":material/tune:"),
-    st.Page("paginas/o5_tienda.py", title="Consultar tienda", icon=":material/storefront:"),
+    st.Page("paginas/o1_tablero.py", title="Tablero"),
+    st.Page("paginas/o2_reglas.py", title="Comparar reglas"),
+    st.Page("paginas/o3_senales.py", title="Señales"),
+    st.Page("paginas/o4_escenarios.py", title="Escenarios"),
+    st.Page("paginas/o5_tienda.py", title="Consultar tienda"),
 ]
 
 pagina = st.navigation({"Recorrido": RECORRIDO, "Operación": OPERACION})
-st.sidebar.markdown(marca.WORDMARK, unsafe_allow_html=True)
 
 try:
     if pagina.url_path in {p.url_path for p in OPERACION}:

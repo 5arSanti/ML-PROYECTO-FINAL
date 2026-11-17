@@ -77,5 +77,5 @@ st.markdown(
 st.dataframe(pd.DataFrame(datos.SUPUESTOS, columns=["Supuesto", "Qué implica"]),
              hide_index=True, width="stretch")
 
-st.page_link("paginas/o1_tablero.py", label="Ir al tablero de operación", icon=":material/dashboard:")
+st.page_link("paginas/o1_tablero.py", label="Ir al tablero de operación")
 marca.pie()

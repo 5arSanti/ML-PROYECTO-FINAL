@@ -23,3 +23,8 @@ def test_formato_es_co(funcion, valor, esperado):
 def test_etiqueta_conocida_y_desconocida():
     assert marca.etiqueta("clientes_prom_dia") == "Clientes por día"
     assert marca.etiqueta("otra_variable") == "Otra variable"
+
+
+def test_wordmark_nombra_al_cliente():
+    assert "Coca-Cola FEMSA" in marca.WORDMARK
+    assert "Plan de neveras" in marca.WORDMARK

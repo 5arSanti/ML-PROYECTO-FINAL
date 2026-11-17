@@ -61,13 +61,16 @@ ETIQUETAS = {
     "zona": "Zona",
 }
 
+TIPO_UI = "IBM Plex Sans, Helvetica Neue, Helvetica, Arial, sans-serif"
+TIPO_TITULO = "Source Serif 4, 'Source Serif Pro', Georgia, 'Times New Roman', serif"
+
 pio.templates["kof"] = go.layout.Template(layout=dict(
-    font=dict(family="Inter, -apple-system, 'Segoe UI', Roboto, sans-serif", color=NEGRO, size=13),
+    font=dict(family=TIPO_UI, color=NEGRO, size=13),
     colorway=[ROJO, GRIS_OSCURO, GRIS, GRIS_CLARO],
     paper_bgcolor="white",
     plot_bgcolor="white",
     separators=",.",
-    title=dict(x=0, xanchor="left", font=dict(size=15, color=NEGRO, weight=600)),
+    title=dict(x=0, xanchor="left", font=dict(family=TIPO_TITULO, size=16, color=NEGRO, weight=600)),
     xaxis=dict(gridcolor="#EEEAE6", zeroline=False, linecolor=GRIS_CLARO, title_font_size=12,
                automargin=True),
     yaxis=dict(gridcolor="#EEEAE6", zeroline=False, linecolor=GRIS_CLARO, title_font_size=12,
@@ -77,39 +80,79 @@ pio.templates["kof"] = go.layout.Template(layout=dict(
     margin=dict(l=10, r=10, t=50, b=10),
 ))
 
-CSS = """
+# Isotipo propio: nevera comercial con franja roja. No es el logotipo de Coca-Cola FEMSA.
+ISOTIPO = """<svg class="kof-isotipo" viewBox="0 0 48 64" aria-hidden="true">
+  <rect x="7" y="3" width="34" height="58" rx="1.5" fill="#fff" stroke="#111" stroke-width="2.4"/>
+  <rect x="7" y="3" width="7" height="58" fill="#E41E2B"/>
+  <rect x="20" y="14" width="15" height="1.8" fill="#D9D5D0"/>
+  <rect x="20" y="20" width="15" height="1.8" fill="#D9D5D0"/>
+  <rect x="20" y="26" width="11" height="1.8" fill="#D9D5D0"/>
+  <rect x="36.5" y="24" width="2.8" height="11" fill="#111"/>
+</svg>"""
+
+CSS = f"""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-html, body, [data-testid="stAppViewContainer"], [data-testid="stSidebar"] {
-  font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
-}
-.kof-marca {font-weight:700; font-size:1.05rem; color:#111111; letter-spacing:-.01em;
-  border-left:5px solid #E41E2B; padding-left:10px; margin:4px 0 12px;}
-.kof-marca span {display:block; font-weight:400; font-size:.78rem; color:#6B6560;}
-.kof-eyebrow {font-size:.74rem; letter-spacing:.12em; text-transform:uppercase;
-  color:#E41E2B; font-weight:700; margin-bottom:2px;}
-.kof-titulo {font-size:2rem; font-weight:700; color:#111111; letter-spacing:-.02em;
-  line-height:1.15; margin:0 0 6px;}
-.kof-bajada {font-size:1.02rem; color:#4A4541; max-width:880px; margin-bottom:18px;}
-.kof-kpi {background:#FFFFFF; border:1px solid #E6E1DC; border-radius:12px;
-  padding:14px 16px; height:100%;}
-.kof-kpi .lab {font-size:.70rem; letter-spacing:.06em; text-transform:uppercase;
-  color:#6B6560; font-weight:700;}
-.kof-kpi .val {font-size:1.6rem; font-weight:700; color:#111111; line-height:1.2;
-  margin-top:4px; font-variant-numeric:tabular-nums;}
-.kof-kpi .sub {font-size:.80rem; color:#6B6560; margin-top:2px;}
-.kof-kpi.principal {border:2px solid #E41E2B;}
-.kof-kpi.principal .val {color:#E41E2B;}
-.kof-lectura {background:#F6F4F2; border-left:4px solid #E41E2B; border-radius:0 8px 8px 0;
-  padding:12px 16px; margin:6px 0 18px; color:#2B2724; font-size:.95rem;}
-.kof-lectura b {color:#111111;}
-.kof-pie {font-size:.76rem; color:#8A8580; border-top:1px solid #E6E1DC;
-  margin-top:28px; padding-top:10px;}
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:wght@600;700&display=swap');
+html, body, [data-testid="stAppViewContainer"], [data-testid="stSidebar"],
+[data-testid="stMarkdown"], [data-testid="stWidgetLabel"] {{
+  font-family: {TIPO_UI};
+}}
+::selection {{ background: #E41E2B; color: #fff; }}
+header[data-testid="stHeader"] {{
+  background: {ROJO};
+  height: 4px;
+  min-height: 4px;
+}}
+header[data-testid="stHeader"] * {{ display: none; }}
+[data-testid="stToolbar"], [data-testid="stDecoration"],
+.stDeployButton, #MainMenu {{ display: none !important; }}
+section[data-testid="stSidebar"] {{
+  background: {FONDO_SUAVE};
+  border-right: 1px solid {GRIS_CLARO};
+}}
+[data-testid="stSidebarHeader"] img {{
+  max-height: 52px;
+}}
+[data-testid="stLogoSpacer"] {{
+  min-height: 0;
+}}
+.kof-marca {{
+  display: flex; align-items: center; gap: 10px;
+  margin: 2px 0 18px; padding-bottom: 14px;
+  border-bottom: 1px solid {GRIS_CLARO};
+}}
+.kof-isotipo {{ width: 28px; height: 38px; flex: 0 0 28px; display: block; }}
+.kof-cliente {{ font-size: .68rem; font-weight: 600; color: {ROJO}; }}
+.kof-producto {{ font-family: {TIPO_TITULO}; font-size: 1.12rem; font-weight: 700;
+  color: {NEGRO}; line-height: 1.15; margin-top: 1px; }}
+.kof-meta {{ font-size: .72rem; color: {GRIS_OSCURO}; margin-top: 2px; }}
+.kof-titulo {{ font-family: {TIPO_TITULO}; font-size: 2.05rem; font-weight: 700;
+  color: {NEGRO}; letter-spacing: -.02em; line-height: 1.18; margin: 4px 0 8px; }}
+.kof-contexto {{ font-size: .88rem; color: {GRIS_OSCURO}; margin: -2px 0 10px; }}
+.kof-bajada {{ font-size: 1.02rem; color: #3F3A36; max-width: 42rem; margin: 0 0 22px;
+  line-height: 1.45; }}
+.kof-kpi {{ background: #fff; border: 1px solid {GRIS_CLARO}; border-radius: 2px;
+  padding: 12px 14px; height: 100%; }}
+.kof-kpi .lab {{ font-size: .72rem; color: {GRIS_OSCURO}; font-weight: 500; }}
+.kof-kpi .val {{ font-size: 1.55rem; font-weight: 600; color: {NEGRO}; line-height: 1.2;
+  margin-top: 4px; font-variant-numeric: tabular-nums; }}
+.kof-kpi .sub {{ font-size: .80rem; color: {GRIS_OSCURO}; margin-top: 2px; }}
+.kof-kpi.principal .val {{ color: {ROJO}; }}
+.kof-lectura {{ background: {FONDO_SUAVE}; border-top: 1px solid {ROJO};
+  padding: 12px 16px; margin: 8px 0 20px; color: #2B2724; font-size: .95rem; }}
+.kof-lectura b {{ color: {NEGRO}; }}
+.kof-pie {{ font-size: .76rem; color: {GRIS}; border-top: 1px solid {GRIS_CLARO};
+  margin-top: 32px; padding-top: 10px; max-width: 46rem; }}
 </style>
 """
 
-WORDMARK = ('<div class="kof-marca">Plan de Neveras · FEMSA'
-            '<span>Analítica comercial · Proyecto final ML</span></div>')
+WORDMARK = (
+    f'<div class="kof-marca">{ISOTIPO}<div>'
+    '<div class="kof-cliente">Coca-Cola FEMSA</div>'
+    '<div class="kof-producto">Plan de neveras</div>'
+    '<div class="kof-meta">Analítica comercial · Universidad Libre</div>'
+    "</div></div>"
+)
 
 
 def _es(texto: str) -> str:
@@ -148,8 +191,10 @@ def aplicar_estilo() -> None:
     st.markdown(CSS, unsafe_allow_html=True)
 
 
-def encabezado(eyebrow: str, titulo: str, bajada: str = "") -> None:
-    html = f'<div class="kof-eyebrow">{eyebrow}</div><div class="kof-titulo">{titulo}</div>'
+def encabezado(contexto: str, titulo: str, bajada: str = "") -> None:
+    html = f'<div class="kof-titulo">{titulo}</div>'
+    if contexto and not contexto.casefold().startswith("operaci"):
+        html += f'<div class="kof-contexto">{contexto}</div>'
     if bajada:
         html += f'<div class="kof-bajada">{bajada}</div>'
     st.markdown(html, unsafe_allow_html=True)
@@ -180,7 +225,7 @@ def grafico(fig: go.Figure, alto: int = 380) -> None:
 
 
 def siguiente(ruta: str, texto: str) -> None:
-    st.page_link(ruta, label=texto, icon=":material/arrow_forward:")
+    st.page_link(ruta, label=texto)
 
 
 def pie() -> None:
