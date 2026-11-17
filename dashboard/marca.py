@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 import plotly.io as pio
 import streamlit as st
 
-ROJO = "#E41E2B"
+ROJO = "#C42A32"
 ROJO_OSCURO = "#7A0E14"
 NEGRO = "#111111"
 GRIS_OSCURO = "#5F5A55"
@@ -97,7 +97,7 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stSidebar"],
 [data-testid="stMarkdown"], [data-testid="stWidgetLabel"] {{
   font-family: {TIPO_UI};
 }}
-::selection {{ background: #E41E2B; color: #fff; }}
+::selection {{ background: {ROJO}; color: #fff; }}
 header[data-testid="stHeader"] {{
   background: {ROJO};
   height: 4px;
@@ -110,8 +110,21 @@ section[data-testid="stSidebar"] {{
   background: {FONDO_SUAVE};
   border-right: 1px solid {GRIS_CLARO};
 }}
-[data-testid="stSidebarHeader"] img {{
-  max-height: 52px;
+[data-testid="stSidebarHeader"] {{
+  background: {ROJO};
+  margin: -1.15rem -1.5rem 0.75rem;
+  padding: 16px 18px 14px;
+}}
+[data-testid="stSidebarHeader"] img,
+img[data-testid="stSidebarLogo"] {{
+  height: 96px !important;
+  max-height: 96px !important;
+  width: auto !important;
+  object-fit: contain;
+}}
+[data-testid="stSidebarCollapseButton"] svg {{
+  fill: #fff;
+  color: #fff;
 }}
 [data-testid="stLogoSpacer"] {{
   min-height: 0;
