@@ -14,7 +14,7 @@ st.set_page_config(page_title="Plan de neveras · Coca-Cola FEMSA",
                    layout="wide")
 filtros.conservar_estado()
 marca.aplicar_estilo()
-st.logo(str(_ASSETS / "lockup.png"), icon_image=str(_ASSETS / "marca.png"), size="large")
+st.logo(str(_ASSETS / "marca.png"), icon_image=str(_ASSETS / "marca.png"))
 
 RECORRIDO = [
     st.Page("paginas/r1_analisis.py", title="1. Análisis exploratorio", default=True),

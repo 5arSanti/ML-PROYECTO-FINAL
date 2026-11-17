@@ -1,7 +1,9 @@
 """Identidad visual (inspirada en Coca-Cola FEMSA), formato es-CO y componentes."""
 from __future__ import annotations
 
+import base64
 import math
+from pathlib import Path
 
 import plotly.graph_objects as go
 import plotly.io as pio
@@ -111,23 +113,43 @@ section[data-testid="stSidebar"] {{
   border-right: 1px solid {GRIS_CLARO};
 }}
 [data-testid="stSidebarHeader"] {{
-  background: {ROJO};
-  margin: -1.15rem -1.5rem 0.75rem;
-  padding: 16px 18px 14px;
+  background: {ROJO} __BANNER__ center 14px / 88% auto no-repeat !important;
+  margin: -1.15rem -1.5rem 0.75rem !important;
+  padding: 0 !important;
+  height: 168px !important;
+  min-height: 168px !important;
+  max-height: 168px !important;
+  overflow: hidden !important;
+  position: relative !important;
 }}
 [data-testid="stSidebarHeader"] img,
-img[data-testid="stSidebarLogo"] {{
-  height: 96px !important;
-  max-height: 96px !important;
-  width: auto !important;
-  object-fit: contain;
+img[data-testid="stSidebarLogo"],
+img[data-testid="stLogo"],
+[data-testid="stLogoSpacer"] {{
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+}}
+[data-testid="stSidebarCollapseButton"] {{
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  z-index: 3 !important;
 }}
 [data-testid="stSidebarCollapseButton"] svg {{
-  fill: #fff;
-  color: #fff;
+  fill: #fff !important;
+  color: #fff !important;
 }}
-[data-testid="stLogoSpacer"] {{
-  min-height: 0;
+section[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarHeader"] {{
+  background: {ROJO} !important;
+  height: 3.5rem !important;
+  min-height: 3.5rem !important;
+  max-height: 3.5rem !important;
+}}
+section[data-testid="stSidebar"][aria-expanded="false"] [data-testid="stSidebarHeader"] img {{
+  opacity: 1 !important;
+  height: 2rem !important;
+  width: 2rem !important;
 }}
 .kof-marca {{
   display: flex; align-items: center; gap: 10px;
@@ -201,7 +223,10 @@ def etiqueta(variable: str) -> str:
 
 
 def aplicar_estilo() -> None:
-    st.markdown(CSS, unsafe_allow_html=True)
+    banner = Path(__file__).with_name("assets") / "lockup.png"
+    data = base64.b64encode(banner.read_bytes()).decode("ascii")
+    st.markdown(CSS.replace("__BANNER__", f"url('data:image/png;base64,{data}')"),
+                unsafe_allow_html=True)
 
 
 def encabezado(contexto: str, titulo: str, bajada: str = "") -> None:
